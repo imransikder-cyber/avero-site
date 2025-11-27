@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Avero | Official Brand Store</title>
+  <title>Avero | Online Brand Store</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * {
@@ -14,312 +14,644 @@
     body {
       background: #f5f5f5;
       color: #222;
+      display: flex;
+      min-height: 100vh;
     }
-    /* Navbar */
-    .navbar {
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background: #111827;
+      color: #e5e7eb;
+      padding: 1.2rem 1rem;
+      position: sticky;
+      top: 0;
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #f97316;
+    }
+    .sidebar-sub {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-bottom: 1.3rem;
+    }
+    .sidebar-section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9ca3af;
+      margin-bottom: 0.5rem;
+    }
+    .category-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    .category-list li {
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.9rem 1.5rem;
+    }
+    .category-list li span {
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+    .category-list li:hover {
+      background: #1f2937;
+    }
+    .category-list li.active {
+      background: #f97316;
+      color: #111827;
+    }
+
+    .sidebar-footer {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+    .sidebar-footer strong {
+      color: #e5e7eb;
+    }
+
+    /* Main Area */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Topbar / header */
+    .topbar {
       background: #ffffffee;
       backdrop-filter: blur(8px);
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0.9rem 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
       position: sticky;
       top: 0;
       z-index: 10;
     }
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .nav-links a {
-      margin-left: 1rem;
-      text-decoration: none;
-      font-size: 0.95rem;
-      color: #444;
-    }
-    .nav-links a:hover {
-      color: #ff6b35;
-    }
-
-    /* Hero */
-    .hero {
-      min-height: 55vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem 1.5rem;
-      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 2.6rem;
-      margin-bottom: 0.7rem;
-    }
-    .hero p {
-      max-width: 600px;
-      margin: 0 auto 1.4rem auto;
-      color: #444;
-    }
-    .btn-primary {
-      display: inline-block;
-      padding: 0.7rem 1.4rem;
-      border-radius: 999px;
-      border: none;
-      background: #ff6b35;
-      color: #fff;
-      cursor: pointer;
-      font-size: 0.95rem;
-      text-decoration: none;
-    }
-    .btn-primary:hover {
-      opacity: 0.9;
-    }
-
-    /* Sections */
-    section {
-      padding: 2.5rem 1.5rem;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 1.8rem;
-    }
-    .section-header h2 {
-      font-size: 1.7rem;
-      margin-bottom: 0.4rem;
-    }
-    .section-header p {
-      color: #666;
-      font-size: 0.95rem;
-    }
-
-    /* Product grid */
-    .products-grid {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 1.3rem;
-    }
-    .product-card {
-      background: #fff;
-      border-radius: 0.9rem;
-      padding: 1.1rem;
-      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.05);
+    .topbar-left {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
-    .product-tag {
-      font-size: 0.75rem;
+    .topbar-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .topbar-sub {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .search-box input {
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+      min-width: 220px;
+    }
+    .search-box select {
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      font-size: 0.85rem;
+    }
+
+    /* Content */
+    .content {
+      padding: 1.5rem 1.3rem 1.8rem 1.3rem;
+    }
+
+    .section-header {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .section-header h2 {
+      font-size: 1.1rem;
+    }
+    .section-header p {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    /* Products grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1rem;
+    }
+    .product-card {
+      background: #ffffff;
+      border-radius: 0.8rem;
+      padding: 0.7rem;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.07);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(15, 23, 42, 0.12);
+    }
+    .product-image-wrapper {
+      width: 100%;
+      border-radius: 0.7rem;
+      overflow: hidden;
+      margin-bottom: 0.6rem;
+      background: #e5e7eb;
+    }
+    .product-image-wrapper img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      height: 150px;
+    }
+    .product-category {
+      font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #ff6b35;
-      margin-bottom: 0.4rem;
+      letter-spacing: 0.07em;
+      color: #f97316;
+      margin-bottom: 0.25rem;
     }
     .product-name {
+      font-size: 0.9rem;
       font-weight: 600;
       margin-bottom: 0.3rem;
     }
     .product-desc {
-      font-size: 0.85rem;
-      color: #666;
-      margin-bottom: 0.7rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 0.4rem;
+      min-height: 34px;
     }
-    .product-footer {
+    .product-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-top: auto;
     }
     .product-price {
       font-weight: 700;
-      color: #ff6b35;
-      font-size: 1rem;
-    }
-    .product-note {
-      font-size: 0.75rem;
-      color: #777;
-    }
-
-    /* About & contact */
-    .text-block {
-      max-width: 750px;
-      margin: 0 auto;
-      text-align: center;
-      color: #555;
-      line-height: 1.6;
+      color: #111827;
       font-size: 0.95rem;
     }
-    .contact-highlight {
-      margin-top: 1rem;
-      font-weight: 600;
+    .product-code {
+      font-size: 0.7rem;
+      color: #9ca3af;
+    }
+
+    /* Info bar */
+    .infobar {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 0.9rem;
     }
 
     /* Footer */
     footer {
-      padding: 1rem 1.5rem;
-      text-align: center;
+      border-top: 1px solid #e5e7eb;
+      padding: 0.8rem 1.3rem;
       font-size: 0.8rem;
-      color: #777;
+      color: #6b7280;
+      margin-top: auto;
+    }
+    footer span {
+      color: #f97316;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        position: static;
+        max-height: none;
+        display: flex;
+        flex-direction: column;
+      }
+      .sidebar-footer {
+        display: none;
+      }
     }
 
     @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 2rem;
+      .search-box {
+        width: 100%;
+        justify-content: flex-start;
       }
-      .nav-links {
+      .search-box input {
+        flex: 1;
+        min-width: 0;
+      }
+      .search-box select {
         display: none;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">Avero</div>
-    <nav class="nav-links">
-      <a href="#products">Products</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">Avero</div>
+    <div class="sidebar-sub">Online brand catalog – clothing, watches, bags, shoes, caps, accessories, electronics, perfume & more.</div>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div>
-      <h1>Avero – Online Brand</h1>
-      <p>
-        Simple, clean and affordable products under one name: <strong>Avero</strong>.
-        Browse our items and check prices directly – order by phone or messaging.
-      </p>
-      <a href="#products" class="btn-primary">View Products & Prices</a>
-    </div>
-  </section>
-
-  <!-- Products -->
-  <section id="products">
-    <div class="section-header">
-      <h2>Avero Products & Prices</h2>
-      <p>Change these names and prices any time – this is your live catalog.</p>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Categories</div>
+      <ul class="category-list" id="categoryList">
+        <!-- Filled by JS -->
+      </ul>
     </div>
 
-    <div class="products-grid">
-      <!-- You can edit these items easily -->
-      <article class="product-card">
+    <div class="sidebar-footer">
+      <div><strong>Order & Support</strong></div>
+      <div>Phone: 01615304515</div>
+      <div>Email: imransikderofficial@gmail.com</div>
+      <div>Location: Bangladesh</div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Avero Product Gallery</div>
+        <div class="topbar-sub">Browse 100+ Avero products with live prices. Order via phone, WhatsApp, or Messenger.</div>
+      </div>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search product by name or code..." />
+        <select id="sortSelect">
+          <option value="default">Sort: Default</option>
+          <option value="priceLowHigh">Price: Low → High</option>
+          <option value="priceHighLow">Price: High → Low</option>
+          <option value="nameAZ">Name: A → Z</option>
+        </select>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+      <div class="section-header">
         <div>
-          <div class="product-tag">Avero</div>
-          <h3 class="product-name">Avero Classic T-Shirt</h3>
-          <p class="product-desc">Soft cotton, everyday wear, unisex fit.</p>
+          <h2>All Products</h2>
+          <p>Click on a category from the left to filter items. All images are license-free placeholders.</p>
         </div>
-        <div class="product-footer">
-          <span class="product-price">৳ 650</span>
-          <span class="product-note">Code: AV-TS01</span>
-        </div>
-      </article>
+        <div id="resultCount"></div>
+      </div>
 
-      <article class="product-card">
-        <div>
-          <div class="product-tag">Avero</div>
-          <h3 class="product-name">Avero Premium Hoodie</h3>
-          <p class="product-desc">Warm fleece, minimal logo front, perfect for winter.</p>
-        </div>
-        <div class="product-footer">
-          <span class="product-price">৳ 1,490</span>
-          <span class="product-note">Code: AV-HD02</span>
-        </div>
-      </article>
+      <div class="infobar">
+        Tip: Use search to quickly find products like <strong>"Hoodie"</strong>, <strong>"Watch"</strong>, or a code like <strong>"AV-CL-01"</strong>.
+      </div>
 
-      <article class="product-card">
-        <div>
-          <div class="product-tag">Avero</div>
-          <h3 class="product-name">Avero Cap</h3>
-          <p class="product-desc">Adjustable cap with clean stitched Avero branding.</p>
-        </div>
-        <div class="product-footer">
-          <span class="product-price">৳ 450</span>
-          <span class="product-note">Code: AV-CP03</span>
-        </div>
-      </article>
+      <section class="products-grid" id="productsGrid">
+        <!-- Products injected by JS -->
+      </section>
+    </main>
 
-      <article class="product-card">
-        <div>
-          <div class="product-tag">Avero</div>
-          <h3 class="product-name">Avero Notebook</h3>
-          <p class="product-desc">Smooth pages, minimal cover – perfect for daily notes.</p>
-        </div>
-        <div class="product-footer">
-          <span class="product-price">৳ 220</span>
-          <span class="product-note">Code: AV-NB04</span>
-        </div>
-      </article>
-
-      <article class="product-card">
-        <div>
-          <div class="product-tag">Avero</div>
-          <h3 class="product-name">Avero Water Bottle</h3>
-          <p class="product-desc">Leak-proof, lightweight bottle for everyday carry.</p>
-        </div>
-        <div class="product-footer">
-          <span class="product-price">৳ 390</span>
-          <span class="product-note">Code: AV-WB05</span>
-        </div>
-      </article>
-
-      <article class="product-card">
-        <div>
-          <div class="product-tag">Avero</div>
-          <h3 class="product-name">Avero Backpack</h3>
-          <p class="product-desc">Spacious, durable backpack for work, study or travel.</p>
-        </div>
-        <div class="product-footer">
-          <span class="product-price">৳ 1,890</span>
-          <span class="product-note">Code: AV-BP06</span>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about">
-    <div class="section-header">
-      <h2>About Avero</h2>
-    </div>
-    <div class="text-block">
-      <p>
-        Avero is an online-first brand focused on clean design and simple pricing.
-        Every product is selected to be practical, minimal, and comfortable, so you can use it every day without thinking twice.
-      </p>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <div class="section-header">
-      <h2>Order & Contact</h2>
-    </div>
-    <div class="text-block">
-      <p>
-        To place an order, just send us the product <strong>name</strong> or <strong>code</strong> with quantity.
-      </p>
-      <p class="contact-highlight">
-        📞 Phone: +8801XXXXXXXXX<br />
-        📧 Email: avero.brand@example.com<br />
-        📍 Location: Dhaka, Bangladesh
-      </p>
-      <p style="margin-top: 0.8rem; font-size: 0.85rem; color: #777;">
-        (Change phone, email and location text here to your real details.)
-      </p>
-    </div>
-  </section>
-
-  <footer>
-    © <span id="year"></span> Avero. All rights reserved.
-  </footer>
+    <!-- Footer -->
+    <footer>
+      © <span id="year"></span> Avero • Simple online brand catalog. Built for <span>Md Imran Sikder</span>.
+    </footer>
+  </div>
 
   <script>
-    // Just auto-update year in footer
+    // --- Data setup ---------------------------------------------------------
+    const categories = [
+      "All",
+      "Clothing",
+      "Watches",
+      "Bags",
+      "Shoes",
+      "Caps",
+      "Accessories",
+      "Electronics",
+      "Perfume",
+      "Personal Care",
+      "Others"
+    ];
+
+    // Base products per category
+    const baseProducts = [
+      {
+        baseName: "Avero Classic Tee",
+        category: "Clothing",
+        desc: "Soft cotton T-shirt designed for everyday comfort.",
+        basePrice: 650,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Tee"
+      },
+      {
+        baseName: "Avero Premium Hoodie",
+        category: "Clothing",
+        desc: "Warm fleece hoodie with minimal branding.",
+        basePrice: 1490,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Hoodie"
+      },
+      {
+        baseName: "Avero Casual Shirt",
+        category: "Clothing",
+        desc: "Smart casual shirt for daily wear.",
+        basePrice: 990,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Shirt"
+      },
+      {
+        baseName: "Avero Analog Watch",
+        category: "Watches",
+        desc: "Simple analog watch with clean dial.",
+        basePrice: 1990,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Watch"
+      },
+      {
+        baseName: "Avero Smart Watch",
+        category: "Watches",
+        desc: "Everyday smartwatch for notifications and steps.",
+        basePrice: 3290,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Smartwatch"
+      },
+      {
+        baseName: "Avero Urban Backpack",
+        category: "Bags",
+        desc: "Durable backpack for work, study or travel.",
+        basePrice: 1890,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Backpack"
+      },
+      {
+        baseName: "Avero Crossbody Bag",
+        category: "Bags",
+        desc: "Compact sling bag for essentials.",
+        basePrice: 1290,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Bag"
+      },
+      {
+        baseName: "Avero Sneakers",
+        category: "Shoes",
+        desc: "Comfortable sneakers suitable for daily walks.",
+        basePrice: 2190,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Sneakers"
+      },
+      {
+        baseName: "Avero Slides",
+        category: "Shoes",
+        desc: "Soft and lightweight slides for home or street.",
+        basePrice: 690,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Slides"
+      },
+      {
+        baseName: "Avero Logo Cap",
+        category: "Caps",
+        desc: "Adjustable cap with stitched Avero branding.",
+        basePrice: 450,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Cap"
+      },
+      {
+        baseName: "Avero Beanie",
+        category: "Caps",
+        desc: "Warm knit beanie for cooler days.",
+        basePrice: 390,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Beanie"
+      },
+      {
+        baseName: "Avero Leather Wallet",
+        category: "Accessories",
+        desc: "Compact wallet with multiple card slots.",
+        basePrice: 750,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Wallet"
+      },
+      {
+        baseName: "Avero Sunglasses",
+        category: "Accessories",
+        desc: "UV-protected sunglasses for sunny days.",
+        basePrice: 890,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Sunglasses"
+      },
+      {
+        baseName: "Avero Earbuds",
+        category: "Electronics",
+        desc: "Wireless earbuds with charging case.",
+        basePrice: 1990,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Earbuds"
+      },
+      {
+        baseName: "Avero Power Bank",
+        category: "Electronics",
+        desc: "Compact power bank for daily use.",
+        basePrice: 1490,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Power+Bank"
+      },
+      {
+        baseName: "Avero Signature Perfume",
+        category: "Perfume",
+        desc: "Everyday fragrance with a fresh note.",
+        basePrice: 1250,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Perfume"
+      },
+      {
+        baseName: "Avero Body Spray",
+        category: "Perfume",
+        desc: "Light body spray for daily refresh.",
+        basePrice: 490,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Body+Spray"
+      },
+      {
+        baseName: "Avero Face Wash",
+        category: "Personal Care",
+        desc: "Gentle face wash for daily use.",
+        basePrice: 350,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Face+Wash"
+      },
+      {
+        baseName: "Avero Shampoo",
+        category: "Personal Care",
+        desc: "Daily use shampoo for soft hair.",
+        basePrice: 420,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Shampoo"
+      },
+      {
+        baseName: "Avero Notebook",
+        category: "Others",
+        desc: "Minimal notebook with smooth pages.",
+        basePrice: 220,
+        image: "https://via.placeholder.com/400x400.png?text=Avero+Notebook"
+      }
+    ];
+
+    // Generate ~100 products by creating small variations
+    const products = [];
+    let idCounter = 1;
+
+    baseProducts.forEach((base, index) => {
+      const variantsPerBase = 5; // 20 base x 5 = 100 items
+      for (let i = 1; i <= variantsPerBase; i++) {
+        const priceVariation = (i - 3) * 50; // small ± price change
+        const finalPrice = Math.max(150, base.basePrice + priceVariation);
+
+        products.push({
+          id: idCounter++,
+          name: `${base.baseName} #${i}`,
+          category: base.category,
+          description: base.desc,
+          price: finalPrice,
+          code: generateCode(base.category, index + 1, i),
+          image: base.image
+        });
+      }
+    });
+
+    function generateCode(category, catIndex, variantIndex) {
+      const catMap = {
+        "Clothing": "CL",
+        "Watches": "WT",
+        "Bags": "BG",
+        "Shoes": "SH",
+        "Caps": "CP",
+        "Accessories": "AC",
+        "Electronics": "EL",
+        "Perfume": "PF",
+        "Personal Care": "PC",
+        "Others": "OT"
+      };
+      const catCode = catMap[category] || "AV";
+      const part1 = String(catIndex).padStart(2, "0");
+      const part2 = String(variantIndex).padStart(2, "0");
+      return `AV-${catCode}-${part1}${part2}`;
+    }
+
+    // --- DOM elements ------------------------------------------------------
+    const categoryListEl = document.getElementById("categoryList");
+    const productsGridEl = document.getElementById("productsGrid");
+    const searchInputEl = document.getElementById("searchInput");
+    const sortSelectEl = document.getElementById("sortSelect");
+    const resultCountEl = document.getElementById("resultCount");
+
+    let activeCategory = "All";
+    let currentProducts = [...products];
+
+    // Sidebar category render
+    function renderCategories() {
+      categoryListEl.innerHTML = "";
+      categories.forEach((cat) => {
+        const li = document.createElement("li");
+        li.textContent = cat;
+        li.dataset.category = cat;
+
+        if (cat === activeCategory) li.classList.add("active");
+
+        const countSpan = document.createElement("span");
+        countSpan.textContent =
+          cat === "All"
+            ? products.length
+            : products.filter((p) => p.category === cat).length;
+        li.appendChild(countSpan);
+
+        li.addEventListener("click", () => {
+          activeCategory = cat;
+          document
+            .querySelectorAll(".category-list li")
+            .forEach((node) => node.classList.remove("active"));
+          li.classList.add("active");
+          applyFilters();
+        });
+
+        categoryListEl.appendChild(li);
+      });
+    }
+
+    // Apply category + search + sort
+    function applyFilters() {
+      const query = searchInputEl.value.trim().toLowerCase();
+      let filtered = products.filter((p) => {
+        const matchCategory =
+          activeCategory === "All" ? true : p.category === activeCategory;
+        const matchQuery =
+          p.name.toLowerCase().includes(query) ||
+          p.code.toLowerCase().includes(query);
+        return matchCategory && matchQuery;
+      });
+
+      const sortValue = sortSelectEl.value;
+      if (sortValue === "priceLowHigh") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortValue === "priceHighLow") {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sortValue === "nameAZ") {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      currentProducts = filtered;
+      renderProducts();
+    }
+
+    // Render products to grid
+    function renderProducts() {
+      productsGridEl.innerHTML = "";
+      if (currentProducts.length === 0) {
+        productsGridEl.innerHTML = "<p>No products found. Try a different search or category.</p>";
+        resultCountEl.textContent = "";
+        return;
+      }
+
+      currentProducts.forEach((p) => {
+        const card = document.createElement("article");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <div class="product-image-wrapper">
+            <img src="${p.image}" alt="${p.name}" loading="lazy" />
+          </div>
+          <div class="product-category">${p.category}</div>
+          <div class="product-name">${p.name}</div>
+          <div class="product-desc">${p.description}</div>
+          <div class="product-bottom">
+            <div class="product-price">৳ ${p.price}</div>
+            <div class="product-code">${p.code}</div>
+          </div>
+        `;
+
+        productsGridEl.appendChild(card);
+      });
+
+      resultCountEl.textContent = `${currentProducts.length} items shown`;
+    }
+
+    // Events
+    searchInputEl.addEventListener("input", () => {
+      applyFilters();
+    });
+
+    sortSelectEl.addEventListener("change", () => {
+      applyFilters();
+    });
+
+    // Init
+    renderCategories();
+    applyFilters();
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+
